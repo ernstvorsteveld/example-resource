@@ -1,0 +1,64 @@
+= How to setup a project using bower and angularjs $resource
+Ernst Vorsteveld
+:toc: left
+:doctype: book
+:docinfo:
+
+== Bower configuration
+Bower configuration consists of two files:
+
+* .bowerrc
+* bower.json
+
+=== .bowerrc
+In this file we configure the directory where bower will write components to.
+
+[source, json]
+----
+{
+  "directory": "src/main/resources/static/components/"
+}
+----
+
+=== bower.json
+This file contains the bower configuration. Find Bower information on the internet.
+
+Example:
+[source,json]
+----
+{
+  "name": "example-resource",
+  "authors": [
+    "Ernst Vorsteveld <ernst.vorsteveld@gmail.com>"
+  ],
+  "description": "Test using $resource of angularjs",
+  "main": "",
+  "moduleType": [],
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.4.8",
+    "angular-ui-bootstrap": "0.14.3",
+    "angular-route" :"1.4.8",
+    "angular-mocks" : "1.4.8",
+    "angular-resource" : "1.4.8"
+  }
+}
+----
+
+== URLS
+
+I added a constant for specification of some constant values. I also used the persons controller url.
+This is not how you would expect it (this url should be defined in the person.factory.js. It is only created for
+showing how it could work.
+
+== Resource usage
+
+The Person factory uses a angularjs $resource. It shows how you can retrieve a single user and all the users.

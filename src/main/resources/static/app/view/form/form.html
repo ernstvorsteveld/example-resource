@@ -1,0 +1,40 @@
+<div>
+    form controller.
+
+    <input type="text" ng-model="form.username">
+    <button ng-click="form.loadOne()">load one</button>
+    <p>
+    <span>
+        person: {{form.person}}
+    </span>
+    </p>
+
+    <br/>
+
+    <button ng-click="form.loadAll()">
+        LoadAll
+    </button>
+    <p>
+    <span>
+        persons: {{form.persons}}
+    </span>
+    </p>
+
+    <br/>
+    <button ng-click="form.create()">
+        Create
+    </button>
+    <span>
+        <div>
+            username:
+            <div><input type="text" ng-model="form.username"></div>
+            firstname:
+            <div><input type="text" ng-model="form.firstname"></div>
+            middlename:
+            <div><input type="text" ng-model="form.middlename"></div>
+            lastname:
+            <div><input type="text" ng-model="form.lastname"></div>
+        </div>
+    </span>
+
+</div>

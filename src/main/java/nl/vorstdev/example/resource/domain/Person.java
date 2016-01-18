@@ -1,0 +1,104 @@
+package nl.vorstdev.example.resource.domain;
+
+import java.util.Map;
+import java.util.UUID;
+
+/**
+ * Created by ernstvorsteveld on 16/01/16.
+ */
+public class Person {
+
+    public static final String USERNAME = "username";
+    public static final String FIRSTNAME = "firstname";
+    public static final String MIDDLENAME = "middlename";
+    public static final String LASTNAME = "lastname";
+
+    private String id;
+    private String userName;
+    private String firstName;
+    private String middleName;
+    private String lastName;
+
+    public Person() {
+        init();
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getMiddleName() {
+        return middleName;
+    }
+
+    public void setMiddleName(String middleName) {
+        this.middleName = middleName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public void init() {
+        this.id = UUID.randomUUID().toString();
+    }
+
+    public static class PersonBuilder {
+
+        private String userName;
+        private String firstName;
+        private String middleName;
+        private String lastName;
+
+        public PersonBuilder(String userName) {
+            this.userName = userName;
+        }
+
+        public PersonBuilder(Map<String, String> personMap) {
+            this(personMap.get(USERNAME));
+            firstName = personMap.get(FIRSTNAME);
+            middleName = personMap.get(MIDDLENAME);
+            lastName = personMap.get(LASTNAME);
+        }
+
+        public PersonBuilder name(String firstName, String middleName, String lastName) {
+            this.firstName = firstName;
+            this.middleName = middleName;
+            this.lastName = lastName;
+            return this;
+        }
+
+        public Person build() {
+            Person person = new Person();
+            person.setUserName(userName);
+            person.setFirstName(firstName);
+            person.setMiddleName(middleName);
+            person.setLastName(lastName);
+            return person;
+        }
+    }
+}

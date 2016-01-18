@@ -1,0 +1,54 @@
+group 'nl.vorstdev.example.resource'
+version '1.0-SNAPSHOT'
+
+buildscript {
+    ext {
+        springBootVersion = '1.2.4.RELEASE'
+    }
+    repositories {
+        mavenCentral()
+        jcenter()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        classpath("com.moowork.gradle:gradle-node-plugin:0.9")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'spring-boot'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+jar {
+    baseName = 'i18n'
+    version =  '0.1.0'
+}
+
+repositories {
+    mavenCentral()
+    maven { url 'http://repo.spring.io/release' }
+    maven { url "http://repo.spring.io/libs-snapshot-local" }
+    maven { url "http://repo.spring.io/libs-milestone-local" }
+}
+
+dependencies {
+    compile("org.springframework.boot:spring-boot-starter-web")
+    compile("org.springframework.boot:spring-boot-starter-actuator")
+    compile("org.codehaus.jackson:jackson-mapper-asl:1.9.13")
+    compile("com.google.guava:guava:18.0")
+    compile("org.apache.commons:commons-lang3:3.4")
+    compile("org.springframework:spring-context-support:4.1.6.RELEASE")
+
+    testCompile("org.springframework.boot:spring-boot-starter-test")
+    testCompile("junit:junit:4.12")
+    testCompile("com.jayway.jsonpath:json-path:0.8.1")
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.0'
+}
+
+
