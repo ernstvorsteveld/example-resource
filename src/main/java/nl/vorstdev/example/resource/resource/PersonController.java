@@ -1,6 +1,7 @@
 package nl.vorstdev.example.resource.resource;
 
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import nl.vorstdev.example.resource.domain.Person;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,7 +18,7 @@ import java.util.Map;
  * Created by ernstvorsteveld on 16/01/16.
  */
 @Controller
-@Api(tags = "this is a PersonController")
+@Api(tags = "Person CRUD Services", produces = MediaType.APPLICATION_JSON_VALUE)
 @RequestMapping(value = "persons",
         produces = MediaType.APPLICATION_JSON_VALUE)
 public class PersonController {
@@ -29,8 +30,10 @@ public class PersonController {
 
     @RequestMapping(method = RequestMethod.GET)
     @ResponseBody
+    @ApiOperation(code = 200, httpMethod = "GET", value = "/", notes = "Retrieve all available persons in a page manner" +
+            ". The response will contain default the first page of 5 users.", response = Person.class, responseContainer = "List")
     public List<Person> personList(@RequestParam(value = "page", defaultValue = "1") int page,
-                                   @RequestParam(value = "size", defaultValue = "1") int size) {
+                                   @RequestParam(value = "size", defaultValue = "5") int size) {
         logger.debug("About to get all persons.");
         return personInitializer.getPersons();
     }
@@ -52,6 +55,7 @@ public class PersonController {
     @RequestMapping(method = RequestMethod.POST,
             consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
+    @ApiOperation(value = "/", response = Person.class, code = 201)
     public Person create(@RequestBody Map<String, String> personMap, HttpServletResponse response) {
         logger.debug("About to create a user with values: {}.", personMap);
         Person person = new Person.PersonBuilder(personMap).build();
@@ -73,7 +77,7 @@ public class PersonController {
                 break;
             }
         }
-        if(!found) {
+        if (!found) {
             response.setStatus(HttpServletResponse.SC_NOT_FOUND);
         } else {
             response.setStatus(HttpServletResponse.SC_ACCEPTED);
