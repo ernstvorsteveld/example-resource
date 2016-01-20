@@ -1,5 +1,6 @@
 package nl.vorstdev.example.resource.resource;
 
+import io.swagger.annotations.Api;
 import nl.vorstdev.example.resource.domain.Person;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,6 +17,7 @@ import java.util.Map;
  * Created by ernstvorsteveld on 16/01/16.
  */
 @Controller
+@Api(tags = "this is a PersonController")
 @RequestMapping(value = "persons",
         produces = MediaType.APPLICATION_JSON_VALUE)
 public class PersonController {
