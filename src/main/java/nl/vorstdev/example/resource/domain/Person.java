@@ -1,11 +1,15 @@
 package nl.vorstdev.example.resource.domain;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 import java.util.Map;
 import java.util.UUID;
 
 /**
  * Created by ernstvorsteveld on 16/01/16.
  */
+//@ApiModel(description = "The Person object.")
 public class Person {
 
     public static final String USERNAME = "username";

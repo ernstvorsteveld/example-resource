@@ -1,7 +1,6 @@
 package nl.vorstdev.example.resource.resource;
 
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.*;
 import nl.vorstdev.example.resource.domain.Person;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,7 +30,15 @@ public class PersonController {
     @RequestMapping(method = RequestMethod.GET)
     @ResponseBody
     @ApiOperation(code = 200, httpMethod = "GET", value = "/", notes = "Retrieve all available persons in a page manner" +
-            ". The response will contain default the first page of 5 users.", response = Person.class, responseContainer = "List")
+            ". The response will contain default the first page of 5 users.", response = Person.class,
+            responseContainer = "List",
+            nickname = "Get persons")
+    @ApiImplicitParams(value = {
+            @ApiImplicitParam(name = "page", paramType = "path", dataType = "int",
+                    value = "Page number, starts with 1"),
+            @ApiImplicitParam(name = "size", paramType = "path", dataType = "int",
+                    value = "Page size")})
+    @ApiResponse(code = 200, responseContainer = "List", response = Person.class, message = "Message for personList.")
     public List<Person> personList(@RequestParam(value = "page", defaultValue = "1") int page,
                                    @RequestParam(value = "size", defaultValue = "5") int size) {
         logger.debug("About to get all persons.");
@@ -40,7 +47,14 @@ public class PersonController {
 
     @RequestMapping(value = "{userName}", method = RequestMethod.GET)
     @ResponseBody
-    public Person person(@PathVariable("userName") final String userName, HttpServletResponse response) {
+    @ApiOperation(code = 200, httpMethod = "GET", value = "/{userName}", notes = "Retrieve one person by its username.",
+            response = Person.class,
+            nickname = "Get person a person by its user name")
+    @ApiResponse(code = 200, response = Person.class, message = "Message for person.", reference = "Person")
+    public Person person(
+            @ApiParam(name = "userName", value = "The username of the user to search for.", required = true, example = "username-1")
+            @PathVariable("userName") final String userName,
+            HttpServletResponse response) {
         logger.debug("About to load by userName {}.", userName);
         for (Person person : personInitializer.getPersons()) {
             if (person.getUserName().equals(userName)) {
@@ -65,6 +79,11 @@ public class PersonController {
     }
 
     @RequestMapping(value = "{userName}", method = RequestMethod.DELETE)
+    @ApiOperation(code = 200, httpMethod = "DELETE", value = "/{userName}", notes = "Delete one person by its " +
+            "username.",
+            response = Void.class,
+            nickname = "Delete a person by its user name")
+    @ApiResponse(code = 200, response = Person.class, message = "Message for person.", reference = "Person")
     @ResponseBody
     public void delete(@PathVariable("userName") final String userName, HttpServletResponse response) {
         logger.debug("About to delete by userName {}.", userName);
@@ -83,6 +102,4 @@ public class PersonController {
             response.setStatus(HttpServletResponse.SC_ACCEPTED);
         }
     }
-
-
 }
