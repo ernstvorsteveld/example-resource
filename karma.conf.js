@@ -15,14 +15,13 @@ module.exports = function (config) {
 
         // list of files / patterns to load in the browser
         files: [
-            'bower_components/angular/angular.js',
-            'bower_components/angular-route/angular-route.js',
-            'bower_components/angular-resource/angular-resource.js',
-            'bower_components/angular-mocks/angular-mocks.js',
-            'src/app/**/*.html',
-            'src/app.js',
-            'src/app/**/*.js',
-            'spec/**/*.js'
+            'src/main/resources/static/components/angular/angular.js',
+            'src/main/resources/static/components/angular-route/angular-route.js',
+            'src/main/resources/static/components/angular-resource/angular-resource.js',
+            'src/main/resources/static/components/angular-mocks/angular-mocks.js',
+            'src/main/resources/static/app/**/*.html',
+            'src/main/resources/static/app/**/*.js',
+            'src/test/resources/static/spec/**/*.js'
         ],
 
 
@@ -38,7 +37,8 @@ module.exports = function (config) {
         // pre-process matching files before serving them to the browser
         // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
         preprocessors: {
-            //'src/app/view/**/*.html': 'ng-html2js'
+          'src/main/resources/static/**/*.js': 'coverage'
+          //'src/app/view/**/*.html': 'ng-html2js'
         },
 
         ngHtml2JsPreprocessor: {
@@ -49,8 +49,12 @@ module.exports = function (config) {
         // test results reporter to use
         // possible values: 'dots', 'progress'
         // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-        reporters: ['progress'],
+        reporters: ['progress', 'coverage'],
 
+        coverageReporter: {
+            type : 'html',
+            dir : 'build/coverage/'
+        },
 
         // web server port
         port: 9876,
@@ -77,5 +81,5 @@ module.exports = function (config) {
         // Continuous Integration mode
         // if true, Karma captures browsers, runs the tests and exits
         singleRun: false
-    })
+    });
 };
