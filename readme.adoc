@@ -62,3 +62,7 @@ showing how it could work.
 == Resource usage
 
 The Person factory uses a angularjs $resource. It shows how you can retrieve a single user and all the users.
+
+== Test and generate report
+
+./gradlew clean test jacoco
