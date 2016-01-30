@@ -25,6 +25,7 @@
             newPerson.middlename = middlename;
             newPerson.lastname = lastname;
             newPerson.$save();
+            return newPerson;
         };
 
         return vm;
@@ -34,5 +35,3 @@
     angular.module('app').factory('personFactory', factory);
 
 })();
-
-

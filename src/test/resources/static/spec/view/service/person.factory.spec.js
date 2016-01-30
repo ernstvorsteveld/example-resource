@@ -1,9 +1,7 @@
-describe("Form controller test.", function () {
+describe("Person factory tests.", function () {
 
-    var controller;
     var $httpBackend;
-    var $scope;
-
+    var service;
     var baseUrl = '/persons';
     var responseData = [
         {
@@ -24,53 +22,53 @@ describe("Form controller test.", function () {
         module('app');
     });
 
-    beforeEach(inject(function ($controller, $rootScope, _$httpBackend_) {
-         controller = $controller('formController', {});
+    beforeEach(inject(function (_$httpBackend_, personFactory) {
          $httpBackend = _$httpBackend_;
+         service = personFactory;
      }));
+
+     beforeEach(function () {
+     });
 
      afterEach(function() {
         $httpBackend.verifyNoOutstandingExpectation();
         $httpBackend.verifyNoOutstandingRequest();
      });
 
-    it("Should have default value for username.", function () {
-        expect(controller.username).toBe('username1');
-    });
 
-    it("Should load all.", function () {
+    it("Should load all persons.", function () {
         $httpBackend.expect("GET", baseUrl).respond(200, responseData);
-        controller.loadAll();
+        var persons = service.loadAll();
         $httpBackend.flush();
-        expect(controller.persons.test).toBe(responseData.test);
+        expect(persons[0].username).toBe("username1");
+        expect(persons[1].username).toBe("username2");
     });
 
     it("Should load one person by username.", function () {
         $httpBackend.expect("GET", baseUrl + '/username1').respond(200, responseData[0]);
-        var person = controller.loadOne('username1');
+        var person = service.load("username1");
         $httpBackend.flush();
-        expect(controller.username).toBe("username1");
+        expect(person.username).toBe("username1");
+
+        $httpBackend.expect("GET", baseUrl + '/username2').respond(200, responseData[1]);
+        person = service.load("username2");
+        $httpBackend.flush();
+        expect(person.username).toBe("username2");
     });
 
-    it("Should create person, and is loadable.", function () {
+    it("Should create new user and make get it.", function () {
         var person = {
             username: "username3",
             firstname : "firstname3",
             middlename : "middlename3",
             lastname : "lastname3"
         };
-
-        controller.username = 'username3';
-        controller.firstname = 'firstname3';
-        controller.middlename = 'middlename3';
-        controller.lastname = 'lastname3';
         $httpBackend.expect("POST", baseUrl).respond(200, person);
-        controller.create();
+        service.create('username3', 'firstname3', 'middlename3', 'lastname3');
         $httpBackend.flush();
         $httpBackend.expect("GET", baseUrl + '/username3').respond(200, person);
-        person = controller.loadOne('username3');
+        person = service.load("username3");
         $httpBackend.flush();
-        expect(controller.username).toBe("username3");
+        expect(person.username).toBe("username3");
     });
-
 });
