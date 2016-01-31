@@ -3,7 +3,6 @@
 build/
 example-resource.iml
 node_modules/
-package.json
 readme.html
 settings.gradle
 src/main/resources/static/components
