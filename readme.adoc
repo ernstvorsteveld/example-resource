@@ -67,5 +67,10 @@ The Person factory uses a angularjs $resource. It shows how you can retrieve a s
 
 Code coverage report for java is generated on:
 `./gradlew clean test jacoco`
+result: build/jacocoHtml/index.html
 Code coverage report for javascript is generated on:
 `./gradlew clean karmaRun`
+result: build/coverage/PhantomJS%202.1.1%20(Mac%20OS%20X%200.0.0)/index.html
+
+unit test report:
+build/reports/tests/index.html
