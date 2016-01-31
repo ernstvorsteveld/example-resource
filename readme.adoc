@@ -4,6 +4,14 @@ Ernst Vorsteveld
 :doctype: book
 :docinfo:
 
+== Requirements
+
+Installation of components below is required:
+* jdk 8
+* node package manager npm (`brew install node`)
+* bower (`npm install -g bower`)
+
+
 == Bower configuration
 Bower configuration consists of two files:
 
@@ -52,6 +60,12 @@ Example:
   }
 }
 ----
+
+Execute for installation dependencies run: `bower update`
+
+=== install node module dependencies
+
+To install node dependencies run: `npm update`
 
 == URLS
 
