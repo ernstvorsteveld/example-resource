@@ -24,7 +24,7 @@ describe("Form controller test.", function () {
         module('app');
     });
 
-    beforeEach(inject(function ($controller, $rootScope, _$httpBackend_) {
+    beforeEach(inject(function ($controller, _$httpBackend_) {
          controller = $controller('formController', {});
          $httpBackend = _$httpBackend_;
      }));

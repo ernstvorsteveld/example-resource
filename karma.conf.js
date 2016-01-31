@@ -19,7 +19,6 @@ module.exports = function (config) {
             'src/main/resources/static/components/angular-route/angular-route.js',
             'src/main/resources/static/components/angular-resource/angular-resource.js',
             'src/main/resources/static/components/angular-mocks/angular-mocks.js',
-            'src/main/resources/static/app/**/*.html',
             'src/main/resources/static/app/**/*.js',
             'src/test/resources/static/spec/**/*.js'
         ],

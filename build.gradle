@@ -8,10 +8,13 @@ buildscript {
     repositories {
         mavenCentral()
         jcenter()
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
     }
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
-        classpath("com.moowork.gradle:gradle-node-plugin:0.9")
+        classpath "gradle.plugin.com.craigburke.gradle:karma-gradle:1.4.3"
     }
 }
 
@@ -19,6 +22,7 @@ apply plugin: 'java'
 apply plugin: 'idea'
 apply plugin: 'spring-boot'
 apply plugin: 'jacoco'
+apply plugin: "com.craigburke.karma"
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
@@ -63,4 +67,35 @@ jacocoTestReport {
         csv.enabled false
         html.destination "${buildDir}/jacocoHtml"
     }
+}
+
+// javascript unit testing
+task testJs(type: NpmTask) {
+    args = ['run', 'single-test']
+
+}
+//include javascript unit tests into project build lifecycle
+test.dependsOn testJs
+
+
+karma {
+    files = [
+        'src/main/resources/static/components/angular/angular.js',
+        'src/main/resources/static/components/angular-route/angular-route.js',
+        'src/main/resources/static/components/angular-resource/angular-resource.js',
+        'src/main/resources/static/components/angular-mocks/angular-mocks.js',
+        'src/main/resources/static/app/**/*.js',
+        'src/test/resources/static/spec/**/*.js'
+    ]
+
+    preprocessors = [
+      'src/main/resources/static/app/**/*.js': 'coverage'
+    ]
+
+    reporters = ['progress', 'coverage']
+
+    coverageReporter = [
+        type : 'html',
+        dir : 'build/coverage/'
+    ]
 }
