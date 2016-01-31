@@ -7,6 +7,7 @@ Ernst Vorsteveld
 == Requirements
 
 Installation of components below is required:
+
 * jdk 8
 * node package manager npm (`brew install node`)
 * bower (`npm install -g bower`)
