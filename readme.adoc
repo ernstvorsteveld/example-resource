@@ -99,3 +99,7 @@ build/reports/tests/index.html
 Find swagger documentation on-line:
 
 Point your browser to: `http://localhost:8080/swagger-ui.html`
+
+== Application
+
+Point your browser to: `http://localhost:8080`
