@@ -15,6 +15,7 @@ buildscript {
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
         classpath "gradle.plugin.com.craigburke.gradle:karma-gradle:1.4.3"
+        classpath "org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:1.2"
     }
 }
 
@@ -23,6 +24,7 @@ apply plugin: 'idea'
 apply plugin: 'spring-boot'
 apply plugin: 'jacoco'
 apply plugin: "com.craigburke.karma"
+apply plugin: "org.sonarqube"
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
