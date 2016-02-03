@@ -31,7 +31,12 @@ module.exports = function (config) {
         //    'karma-jasmine',
         //    'ng-html2js',
         //    'karma-ng-html2js-preprocessor'],
-
+        plugins: [
+                  'karma-jasmine',
+                  'karma-coverage',
+                  'karma-chrome-launcher',
+                  'karma-safari-launcher',
+        ],
 
         // pre-process matching files before serving them to the browser
         // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
