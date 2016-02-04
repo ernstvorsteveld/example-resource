@@ -71,9 +71,9 @@ To install node dependencies run: `npm update`
 
 == URLS
 
-I added a constant for specification of some constant values. I also used the persons controller url.
-This is not how you would expect it (this url should be defined in the person.factory.js. It is only created for
-showing how it could work.
+IAdded a constant for specification of some constant values. I also used the persons controller url. This is not how
+you would expect it (this url should be defined in the person.factory.js. It is only created for showing how it could
+ work.
 
 == Resource usage
 
@@ -102,17 +102,20 @@ Point your browser to: `http://localhost:8080/swagger-ui.html`
 
 == Application
 
-You can start the application from your project directory with the command `gradle bootRun` or `./gradlew bootRun`. Alternatively you can build and run in from the build/lib directory using
-`java -jar -Dserver.port=8080 example-resource-1.0-SNAPSHOT.jar`. This way you can start a second instance on a different port number: `java -jar -Dserver.port=8081 example-resource-1.0-SNAPSHOT.jar`
+You can start the application from your project directory with the command `gradle bootRun` or `./gradlew bootRun`.
+Alternatively you can build and run in from the build/lib directory using `java -jar -Dserver.port=8080
+example-resource-1.0-SNAPSHOT.jar`. This way you can start a second instance on a different port number: `java -jar
+-Dserver.port=8081 example-resource-1.0-SNAPSHOT.jar`
 
 Point your browser to: `http://localhost:8080` or `http://localhost:8081`
 
 == Monitoring and metrics
 
-Monitoring and metrics is provided using Spring Actuator. Access to the actuator endpoints is protected. Check `application.resources` for username/password and an example of
-the configuration. `http://localhost:8080/actuator` shows a list of all the available endpoints. To include this you need
-to add `spring-boot-starter-hateoas`. You can also implement it yourself, see `ShowEndpoints.java`. In that case a list if
-available at `http://localhost:8080/showEndPoints`.
+Monitoring and metrics is provided using Spring Actuator. Access to the actuator endpoints is protected. Check
+`application.resources` for username/password and an example of the configuration. `http://localhost:8080/actuator`
+shows a list of all the available endpoints. To include this you need to add `spring-boot-starter-hateoas`. You can
+also implement it yourself, see `ShowEndpoints.java`. In that case a list if available at
+`http://localhost:8080/showEndPoints`.
 
 Some example endpoints:
 
@@ -123,8 +126,8 @@ Some example endpoints:
 
 == Consul
 
-The application registers itself with Consul. It expects consul to run on `192.168.99.100:8500`. This can be configured in the
-`application.yml` and overwritten from the command line. Easy way to start a consul is using Docker:
+The application registers itself with Consul. It expects consul to run on `192.168.99.100:8500`. This can be
+configured in the `application.yml` and overwritten from the command line. Easy way to start a consul is using Docker:
 
 `docker run -p 8400:8400 -p 8500:8500 -p 8600:53/udp -h node1 progrium/consul -server -bootstrap -ui-dir /ui`
 
