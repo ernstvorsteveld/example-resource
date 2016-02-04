@@ -22,6 +22,4 @@ spring:
         consul:
             host: 192.168.99.100
             port: 8500
-            discovery:
-                instanceId: ${spring.application.name}:${spring.application.instance_id:${random.value}}
-                
+#                instanceId: ${spring.application.name}:${spring.application.instance_id:${random.value}}

@@ -1,3 +1,9 @@
 spring:
     application:
         name: ExampleResource
+    cloud:
+        consul:
+            discovery:
+                enabled: false
+            config:
+                enabled: false
