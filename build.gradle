@@ -44,6 +44,7 @@ repositories {
 dependencies {
     compile("org.springframework.boot:spring-boot-starter-web")
     compile("org.springframework.boot:spring-boot-starter-actuator")
+    compile("org.springframework.boot:spring-boot-starter-security")
     compile("org.codehaus.jackson:jackson-mapper-asl:1.9.13")
     compile("com.google.guava:guava:18.0")
     compile("org.apache.commons:commons-lang3:3.4")
