@@ -103,3 +103,16 @@ Point your browser to: `http://localhost:8080/swagger-ui.html`
 == Application
 
 Point your browser to: `http://localhost:8080`
+
+== Monitoring and metrics
+
+Monitoring and metrics is provided using Spring Actuator. Access to the actuator endpoints is protected. Check `application.resources` for username/password and an example of
+the configuration. `http://localhost:8080/actuator` shows a list of all the available endpoints. To include this you need
+to add `spring-boot-starter-hateoas` to the project and implement `ShowEndpoints.java`.
+
+Some example endpoints:
+
+* `http://localhost:8080/metrics`
+* `http://localhost:8080/info` (info provided through `application.properties`)
+* `http://localhost:8080/health` (custom health using `CustomHealthCheck.java`)
+* `http://localhost:8080/server` (custom endpoint using `ServerEndpoint.java`)
