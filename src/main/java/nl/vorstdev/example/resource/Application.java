@@ -15,12 +15,14 @@ import springfox.documentation.service.ApiInfo;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 /**
  * Created by ernstvorsteveld on 16/01/16.
  */
 @EnableSwagger2
 @SpringBootApplication
+@EnableDiscoveryClient
 public class Application {
 
     public static void main(String[] args) {

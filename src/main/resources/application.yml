@@ -1,0 +1,27 @@
+# ACTUATOR ENDPOINT SECURITY
+management:
+    security:
+        enabled: true
+
+security:
+    basic:
+        enabled: true
+    user:
+        name: admin
+        password: admin
+
+endpoints:  
+    info:
+        id: info
+        sensitive: false
+        enabled: true
+
+# CONSUL CONFIGURATION
+spring:
+    cloud:
+        consul:
+            host: 192.168.99.100
+            port: 8500
+            discovery:
+                instanceId: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+                
