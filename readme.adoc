@@ -108,7 +108,8 @@ Point your browser to: `http://localhost:8080`
 
 Monitoring and metrics is provided using Spring Actuator. Access to the actuator endpoints is protected. Check `application.resources` for username/password and an example of
 the configuration. `http://localhost:8080/actuator` shows a list of all the available endpoints. To include this you need
-to add `spring-boot-starter-hateoas` to the project and implement `ShowEndpoints.java`.
+to add `spring-boot-starter-hateoas`. You can also implement it yourself, see `ShowEndpoints.java`. In that case a list if
+available at `http://localhost:8080/showEndPoints`.
 
 Some example endpoints:
 
