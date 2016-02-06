@@ -4,3 +4,10 @@ Person management app, implemented as Spring Boot application.
 Responsibilities:
 
 * Person management: CRUD operations on persons;
+
+Create to have an example project for:
+
+* Controller annotations for swagger moved to an interface (DocumentedPersonController);
+* Rest mvc controller annotations in the class itself (PersonController);
+* Asciidoctor files found in /src/main/resource/documentation;
+* Generated rest controller api description with mvcRest (Spring rest docs).
