@@ -1,0 +1,48 @@
+:person-controller-docs: {root-dir}/build/generated-snippets/person-controller
+
+== Person controller details
+
+.Person controller methods
+|===
+|Method |Url |Description
+
+|GET
+|/persons/{userName}
+|Retrieve user by username
+
+|GET
+|/persons}
+|Retrieve all users in a paged manner
+|===
+
+=== Retrieve user by username
+
+Retrieve user by username.
+
+==== path parameters
+include::{person-controller-docs}/get-person-by-username/path-parameters.adoc[]
+
+==== curl
+include::{person-controller-docs}/get-person-by-username/curl-request.adoc[]
+
+==== request
+include::{person-controller-docs}/get-person-by-username/http-request.adoc[]
+
+==== response
+include::{person-controller-docs}/get-person-by-username/http-response.adoc[]
+
+=== Retrieve all users in a paged manner
+
+Paged retrieval of all users.
+
+==== request parameters
+include::{person-controller-docs}/get-persons/request-parameters.adoc[]
+
+==== curl
+include::{person-controller-docs}/get-persons/curl-request.adoc[]
+
+==== request
+include::{person-controller-docs}/get-persons/http-request.adoc[]
+
+==== response
+include::{person-controller-docs}/get-persons/http-response.adoc[]

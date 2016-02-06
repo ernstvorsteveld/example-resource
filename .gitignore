@@ -6,3 +6,4 @@ node_modules/
 readme.html
 settings.gradle
 src/main/resources/static/components
+src/main/resources/documentation/*.html

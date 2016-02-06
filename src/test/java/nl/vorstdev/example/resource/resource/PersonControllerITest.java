@@ -38,7 +38,7 @@ public class PersonControllerITest {
     public static final String LASTNAME_A = "lastname_a";
     public static final String USERNAME_A = "username_a";
     @Autowired
-    private PersonController personController;
+    private DocumentedPersonController personController;
     private MockMvc mockMvc;
 
     @Before

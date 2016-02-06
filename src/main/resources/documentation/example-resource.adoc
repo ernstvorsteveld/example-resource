@@ -1,0 +1,17 @@
+= User management service
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 4
+:sectlinks:
+:sectnums:
+
+:root-dir: ../../../..
+
+
+include::synopsis.adoc[]
+
+include::configuration.adoc[]
+
+include::person-controller.adoc[]

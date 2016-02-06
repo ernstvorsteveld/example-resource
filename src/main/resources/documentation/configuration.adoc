@@ -1,0 +1,8 @@
+== Configuration
+
+=== Default application configuration
+
+[source,java]
+----
+include::../application.yml[]
+----
