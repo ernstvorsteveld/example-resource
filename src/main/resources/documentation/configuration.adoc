@@ -1,8 +1,15 @@
 == Configuration
 
-=== Default application configuration
+=== Default application configuration, application.yml
 
-[source,java]
+[source,python]
 ----
 include::../application.yml[]
+----
+
+=== Default application configuration, bootstrap.yml
+
+[source,python]
+----
+include::../bootstrap.yml[]
 ----

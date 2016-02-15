@@ -1,6 +1,7 @@
 package nl.vorstdev.example.resource.resource;
 
-import io.swagger.annotations.*;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
 import nl.vorstdev.example.resource.domain.Person;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,7 +28,9 @@ public class PersonController implements DocumentedPersonController {
 
     @RequestMapping(method = RequestMethod.GET)
     @ResponseBody
-    public List<Person> personList(int page, int size) {
+    public List<Person> personList(
+            @RequestParam(name = "page", defaultValue = "1") Integer page,
+            @RequestParam(name = "page", defaultValue = "10") Integer size) {
         logger.debug("About to get all persons.");
         return personInitializer.getPersons().subList(page - 1, size);
     }
