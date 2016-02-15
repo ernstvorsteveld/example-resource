@@ -15,9 +15,7 @@ freeStyleJob("$basePath/clean-and-compile") {
 }
 
 job("$basePath/test") {
-    description {
-        'Test the project.'
-    }
+    description('Test the project.')
     steps {
         grails {
             useWrapper true
