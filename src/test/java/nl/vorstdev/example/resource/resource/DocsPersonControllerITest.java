@@ -62,7 +62,7 @@ public class DocsPersonControllerITest {
                 .andDo(document("get-person-by-username",
                         preprocessResponse(prettyPrint()),
                         pathParameters(
-                                parameterWithName(PARAM_USERNAME).description(DOC_PARAM_USERNAME))
+                                parameterWithName(P_USERNAME).description(DOC_GET_P_USERNAME))
                         )
                 )
                 .andExpect(status().isOk());
