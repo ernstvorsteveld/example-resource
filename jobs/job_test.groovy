@@ -4,10 +4,10 @@ folder(basePath) {
     description 'This example shows basic folder/job creation.'
 }
 
-freeStyleJob("$basePath/clean-and-compile") {
+freeStyleJob("$basePath/clean and compile") {
     description('Clean and compile the project.')
     steps {
-        grails {
+        gradle {
             useWrapper true
             targets(['clean', 'classes'])
         }
@@ -17,7 +17,7 @@ freeStyleJob("$basePath/clean-and-compile") {
 job("$basePath/test") {
     description('Test the project.')
     steps {
-        grails {
+        gradle {
             useWrapper true
             targets(['test'])
         }
