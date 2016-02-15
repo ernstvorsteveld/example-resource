@@ -16,6 +16,7 @@ buildscript {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
         classpath "gradle.plugin.com.craigburke.gradle:karma-gradle:1.4.3"
         classpath "org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:1.2"
+        classpath "gradle.plugin.com.craigburke.gradle:bower-installer-gradle:2.5.1"
     }
 }
 
@@ -24,6 +25,7 @@ apply plugin: 'idea'
 apply plugin: 'spring-boot'
 apply plugin: 'jacoco'
 apply plugin: "com.craigburke.karma"
+apply plugin: "com.craigburke.bower-installer"
 apply plugin: "org.sonarqube"
 
 sourceCompatibility = 1.8
@@ -104,16 +106,13 @@ jacocoTestReport {
     }
 }
 
-// javascript unit testing
-task testJs(type: NpmTask) {
+task javascriptTest(type: NpmTask) {
     args = ['run', 'single-test']
     description = 'Runs the javascript tests.'
     group = 'verification'
 }
 
-
-//include javascript unit tests into project build lifecycle
-check.dependsOn testJs
+check.dependsOn javascriptTest
 check.dependsOn integrationTest
 
 karma {
@@ -136,4 +135,8 @@ karma {
             type: 'html',
             dir : 'build/coverage/'
     ]
+}
+
+bower {
+    installBase = 'src/main/resources/static/components'
 }
