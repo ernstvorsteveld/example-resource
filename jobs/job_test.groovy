@@ -1,4 +1,4 @@
-String basePath = 'example-resource job-dsl'
+String basePath = 'example-resource jobs'
 
 folder(basePath) {
     description 'This example shows basic folder/job creation.'
