@@ -55,7 +55,7 @@ dependencies {
     compile('io.springfox:springfox-swagger2:2.3.1')
     compile('io.springfox:springfox-swagger-ui:2.3.1')
     compile('io.swagger:swagger-project:1.5.6')
-    
+
     testCompile('io.springfox:springfox-staticdocs:2.3.1')
     testCompile("org.springframework.boot:spring-boot-starter-test")
     testCompile("junit:junit:4.12")
@@ -63,8 +63,37 @@ dependencies {
     testCompile 'org.springframework.restdocs:spring-restdocs-mockmvc:1.0.0.RELEASE'
 }
 
+sourceSets {
+    integrationTests {
+        java.srcDir file('src/integTest/java')
+        resources.srcDir file('src/integTest/resources')
+        compileClasspath = sourceSets.main.output + configurations.testRuntime
+        runtimeClasspath = output + compileClasspath
+    }
+    docGeneration {
+        java.srcDir file('src/docs/java')
+        resources.srcDir file('src/docs/resources')
+        compileClasspath = sourceSets.main.output + configurations.testRuntime
+        runtimeClasspath = output + compileClasspath
+    }
+}
+
+task integrationTest(type: Test) {
+    description = 'Runs the integration tests only.'
+    group = 'verification'
+    testClassesDir = sourceSets.integrationTests.output.classesDir
+    classpath = sourceSets.integrationTests.runtimeClasspath
+}
+
+task generateDocs(type: Test) {
+    description = 'Generates the documentation.'
+    group = 'Documentation'
+    testClassesDir = sourceSets.docGeneration.output.classesDir
+    classpath = sourceSets.docGeneration.runtimeClasspath
+}
+
 task wrapper(type: Wrapper) {
-    gradleVersion = '2.0'
+    gradleVersion = '2.11'
 }
 
 jacocoTestReport {
@@ -78,29 +107,33 @@ jacocoTestReport {
 // javascript unit testing
 task testJs(type: NpmTask) {
     args = ['run', 'single-test']
-
+    description = 'Runs the javascript tests.'
+    group = 'verification'
 }
+
+
 //include javascript unit tests into project build lifecycle
-test.dependsOn testJs
+check.dependsOn testJs
+check.dependsOn integrationTest
 
 karma {
     files = [
-        'src/main/resources/static/components/angular/angular.js',
-        'src/main/resources/static/components/angular-route/angular-route.js',
-        'src/main/resources/static/components/angular-resource/angular-resource.js',
-        'src/main/resources/static/components/angular-mocks/angular-mocks.js',
-        'src/main/resources/static/app/**/*.js',
-        'src/test/resources/static/spec/**/*.js'
+            'src/main/resources/static/components/angular/angular.js',
+            'src/main/resources/static/components/angular-route/angular-route.js',
+            'src/main/resources/static/components/angular-resource/angular-resource.js',
+            'src/main/resources/static/components/angular-mocks/angular-mocks.js',
+            'src/main/resources/static/app/**/*.js',
+            'src/test/resources/static/spec/**/*.js'
     ]
 
     preprocessors = [
-      'src/main/resources/static/app/**/*.js': 'coverage'
+            'src/main/resources/static/app/**/*.js': 'coverage'
     ]
 
     reporters = ['progress', 'coverage']
 
     coverageReporter = [
-        type : 'html',
-        dir : 'build/coverage/'
+            type: 'html',
+            dir : 'build/coverage/'
     ]
 }

@@ -6,6 +6,9 @@ folder(basePath) {
 
 freeStyleJob("$basePath/clean and compile") {
     description('Clean and compile the project.')
+    scm {
+        git 'https://github.com/ernstvorsteveld/example-resource.git'
+    }
     steps {
         gradle {
             description 'Clean up and compile.'

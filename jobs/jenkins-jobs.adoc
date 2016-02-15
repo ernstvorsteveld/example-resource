@@ -1,0 +1,10 @@
+== Jenkins jobs
+
+=== Pre requisites
+
+Install:
+* job-dsl plugin
+* git plugin
+* cloudbees-folder plugin
+* gradle plugin
+* grails plugin

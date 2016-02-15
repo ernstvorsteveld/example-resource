@@ -66,11 +66,6 @@ public class PersonController implements DocumentedPersonController {
     }
 
     @RequestMapping(value = "{userName}", method = RequestMethod.DELETE)
-    @ApiOperation(code = 200, httpMethod = "DELETE", value = "/{userName}", notes = "Delete one person by its " +
-            "username.",
-            response = Void.class,
-            nickname = "Delete a person by its user name")
-    @ApiResponse(code = 200, response = Person.class, message = "Message for person.", reference = "Person")
     @ResponseBody
     public void delete(
             @PathVariable("userName") final String userName,
