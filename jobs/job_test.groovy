@@ -5,9 +5,7 @@ folder(basePath) {
 }
 
 freeStyleJob("$basePath/clean-and-compile") {
-    description {
-        'Clean and compile the project.'
-    }
+    description('Clean and compile the project.')
     steps {
         grails {
             useWrapper true
