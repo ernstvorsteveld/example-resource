@@ -1,0 +1,26 @@
+{
+  "name": "example-resource",
+  "authors": [
+    "Ernst Vorsteveld <ernst.vorsteveld@gmail.com>"
+  ],
+  "description": "Test using $resource of angularjs",
+  "main": "",
+  "moduleType": [],
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.4.8",
+    "angular-ui-bootstrap": "0.14.3",
+    "angular-route" :"1.4.8",
+    "angular-mocks" : "1.4.8",
+    "angular-resource" : "1.4.8"
+  }
+}
+

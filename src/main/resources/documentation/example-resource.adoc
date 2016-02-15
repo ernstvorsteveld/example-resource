@@ -15,3 +15,5 @@ include::synopsis.adoc[]
 include::configuration.adoc[]
 
 include::person-controller.adoc[]
+
+include::gradle.adoc[]

@@ -1,0 +1,26 @@
+== Gradle build script
+
+=== Wrapper
+
+We use the wrapper to be sure that everybody builds the project with the same version of gradle. The wrapper gives us
+ the place to define the version of gradle to be used on any build environment, without the need of installation of a
+  version of gradle.
+
+=== Bower plugin
+
+The bower plugin (https://github.com/craigburke/bower-installer-gradle) is used to call bower from gradle.
+Stopped using it. It deletes the bower.json file, and I want to split the project.
+
+=== Test
+
+Four directories are created with tests:
+
+* test: standard java unit tests;
+* integrationTest: the java integration tests;
+* docs
+
+```
+bower {
+    installBase = 'src/main/resources/static/components'
+}
+```
