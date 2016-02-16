@@ -51,7 +51,7 @@ job("$commitStage/test") {
         gradle {
             description 'Test the project'
             useWrapper true
-            tasks 'test'
+            tasks 'test -x karmaRun'
         }
         downstreamParameterized {
             trigger("integration tests") {

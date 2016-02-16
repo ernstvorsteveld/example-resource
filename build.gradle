@@ -119,8 +119,6 @@ task javascriptTest(type: NpmTask) {
     group = 'verification'
 }
 
-integrationTest.mustRunAfter testClasses
-karmaInit.mustRunAfter integrationTest
-
 check.dependsOn integrationTest
+check.dependsOn javascriptTest
 
