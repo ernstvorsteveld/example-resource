@@ -78,13 +78,13 @@ dependencies {
 }
 
 sourceSets {
-    integrationTests {
+    integTest {
         java.srcDir file('src/integTest/java')
         resources.srcDir file('src/integTest/resources')
         compileClasspath = sourceSets.main.output + configurations.testRuntime
         runtimeClasspath = output + compileClasspath
     }
-    docGeneration {
+    docs {
         java.srcDir file('src/docs/java')
         resources.srcDir file('src/docs/resources')
         compileClasspath = sourceSets.main.output + configurations.testRuntime
@@ -101,15 +101,15 @@ pmd {
 task integrationTest(type: Test) {
     description = 'Runs the integration tests only.'
     group = 'verification'
-    testClassesDir = sourceSets.integrationTests.output.classesDir
-    classpath = sourceSets.integrationTests.runtimeClasspath
+    testClassesDir = sourceSets.integTest.output.classesDir
+    classpath = sourceSets.integTest.runtimeClasspath
 }
 
 task generateDocs(type: Test) {
     description = 'Generates the documentation.'
     group = 'Documentation'
-    testClassesDir = sourceSets.docGeneration.output.classesDir
-    classpath = sourceSets.docGeneration.runtimeClasspath
+    testClassesDir = sourceSets.docs.output.classesDir
+    classpath = sourceSets.docs.runtimeClasspath
 }
 
 task wrapper(type: Wrapper) {
