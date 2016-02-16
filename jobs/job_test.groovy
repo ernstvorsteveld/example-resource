@@ -37,7 +37,7 @@ freeStyleJob("$commitStage/clean and compile") {
         }
         downstreamParameterized {
             trigger("test") {
-                currentBuild()
+                predefinedProp("SOURCE_BUILD_NUMBER","${BUILD_NUMBER}")
             }
         }
     }
