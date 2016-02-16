@@ -1,0 +1,23 @@
+apply plugin: 'com.craigburke.karma'
+
+karma {
+    files = [
+            'src/main/resources/static/components/angular/angular.js',
+            'src/main/resources/static/components/angular-route/angular-route.js',
+            'src/main/resources/static/components/angular-resource/angular-resource.js',
+            'src/main/resources/static/components/angular-mocks/angular-mocks.js',
+            'src/main/resources/static/app/**/*.js',
+            'src/test/resources/static/spec/**/*.js'
+    ]
+
+    preprocessors = [
+            'src/main/resources/static/app/**/*.js': 'coverage'
+    ]
+
+    reporters = ['progress', 'coverage']
+
+    coverageReporter = [
+            type: 'html',
+            dir : 'build/coverage/'
+    ]
+}

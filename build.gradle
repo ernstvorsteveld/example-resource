@@ -21,15 +21,14 @@ apply plugin: 'groovy'
 apply plugin: 'idea'
 apply plugin: 'spring-boot'
 apply plugin: 'jacoco'
-apply plugin: 'com.craigburke.karma'
 apply plugin: 'org.sonarqube'
-apply plugin: 'pmd'
-apply plugin: 'jdepend'
 //apply plugin: 'checkstyle'
 
 apply from: "$rootDir/gradle/version.gradle"
 apply from: "$rootDir/gradle/jdepend.gradle"
 apply from: "$rootDir/gradle/date.gradle"
+apply from: "$rootDir/gradle/pmd.gradle"
+apply from: "$rootDir/gradle/karma.gradle"
 
 ext.configDir = new File(rootDir, 'config')
 
@@ -92,11 +91,6 @@ sourceSets {
     }
 }
 
-pmd {
-    ignoreFailures = true
-    ruleSets = ["java-basic", "java-strings", "java-braces"]
-}
-
 task integrationTest(type: Test) {
     description = 'Runs the integration tests only.'
     group = 'verification'
@@ -109,10 +103,6 @@ task generateDocs(type: Test) {
     group = 'Documentation'
     testClassesDir = sourceSets.docs.output.classesDir
     classpath = sourceSets.docs.runtimeClasspath
-}
-
-task wrapper(type: Wrapper) {
-    gradleVersion = '2.11'
 }
 
 jacocoTestReport {
@@ -129,28 +119,8 @@ task javascriptTest(type: NpmTask) {
     group = 'verification'
 }
 
-check.dependsOn javascriptTest
+integrationTest.mustRunAfter testClasses
+karmaInit.mustRunAfter integrationTest
+
 check.dependsOn integrationTest
-
-karma {
-    files = [
-            'src/main/resources/static/components/angular/angular.js',
-            'src/main/resources/static/components/angular-route/angular-route.js',
-            'src/main/resources/static/components/angular-resource/angular-resource.js',
-            'src/main/resources/static/components/angular-mocks/angular-mocks.js',
-            'src/main/resources/static/app/**/*.js',
-            'src/test/resources/static/spec/**/*.js'
-    ]
-
-    preprocessors = [
-            'src/main/resources/static/app/**/*.js': 'coverage'
-    ]
-
-    reporters = ['progress', 'coverage']
-
-    coverageReporter = [
-            type: 'html',
-            dir : 'build/coverage/'
-    ]
-}
 
