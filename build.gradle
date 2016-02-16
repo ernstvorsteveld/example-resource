@@ -17,16 +17,20 @@ buildscript {
 }
 
 apply plugin: 'java'
+apply plugin: 'groovy'
 apply plugin: 'idea'
 apply plugin: 'spring-boot'
 apply plugin: 'jacoco'
 apply plugin: 'com.craigburke.karma'
 apply plugin: 'org.sonarqube'
 //apply plugin: 'pmd'
-//apply plugin: 'jdepend'
+apply plugin: 'jdepend'
 //apply plugin: 'checkstyle'
 
-apply from: 'gradle/versioning.gradle'
+apply from: "$rootDir/gradle/versioning.gradle"
+apply from: "$rootDir/gradle/jdepend.gradle"
+
+ext.configDir = new File(rootDir, 'config')
 
 jar {
     baseName = project.name

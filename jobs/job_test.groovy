@@ -16,7 +16,7 @@ folder(acceptanceStage) {
 
 
 freeStyleJob("$commitStage/clean and compile") {
-    description('clean and compile')
+    description('Clone from git, clean and compile the project')
     scm {
         git 'https://github.com/ernstvorsteveld/example-resource.git'
     }

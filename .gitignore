@@ -1,3 +1,6 @@
+/buildSrc/buildSrc.iml
+/buildSrc/build
+/buildSrc/.gradle
 .gradle/
 .idea/
 build/
