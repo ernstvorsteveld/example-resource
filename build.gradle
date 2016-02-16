@@ -23,7 +23,7 @@ apply plugin: 'spring-boot'
 apply plugin: 'jacoco'
 apply plugin: 'com.craigburke.karma'
 apply plugin: 'org.sonarqube'
-//apply plugin: 'pmd'
+apply plugin: 'pmd'
 apply plugin: 'jdepend'
 //apply plugin: 'checkstyle'
 
@@ -82,6 +82,12 @@ sourceSets {
         compileClasspath = sourceSets.main.output + configurations.testRuntime
         runtimeClasspath = output + compileClasspath
     }
+}
+
+pmd {
+    ignoreFailures = true
+
+    ruleSets = [ "java-basic", "java-strings", "java-braces" ]
 }
 
 task integrationTest(type: Test) {
