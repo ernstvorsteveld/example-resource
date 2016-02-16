@@ -3,3 +3,5 @@
 Generates a html report based upon the output of jdepend (xml). It uses xslt technology.
 All copied from: https://github.com/bmuschko/gradle-in-action-source/tree/master/chapter12/listing_12_13-jdepend
 
+Gradle expects the source of a build task in the buildSrc directory of a project.
+It should be a "normal" project structure. It is automatically compiled by gradle. (by convention)
