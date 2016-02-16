@@ -36,6 +36,17 @@ freeStyleJob("$commitStage/clean and compile") {
             tasks 'clean classes'
         }
     }
+    wrappers {
+        release {
+            postSuccessfulBuildSteps {
+                downstreamParameterized {
+                    trigger("test") {
+                        predefinedProp("STAGE", "development")
+                    }
+                }
+            }
+        }
+    }
 }
 
 job("$commitStage/test") {
