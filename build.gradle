@@ -27,7 +27,7 @@ apply plugin: 'pmd'
 apply plugin: 'jdepend'
 //apply plugin: 'checkstyle'
 
-apply from: "$rootDir/gradle/versioning.gradle"
+apply from: "$rootDir/gradle/version.gradle"
 apply from: "$rootDir/gradle/jdepend.gradle"
 apply from: "$rootDir/gradle/date.gradle"
 
