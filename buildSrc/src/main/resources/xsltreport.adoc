@@ -5,3 +5,8 @@ All copied from: https://github.com/bmuschko/gradle-in-action-source/tree/master
 
 Gradle expects the source of a build task in the buildSrc directory of a project.
 It should be a "normal" project structure. It is automatically compiled by gradle. (by convention)
+
+=== Generate dot picture
+
+To generate an overview of the complexity use the png generator for dot (need to be installed):
+dot -Tpng build/reports/jdepend/jdepend_main.dot -o main.png
