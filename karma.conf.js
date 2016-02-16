@@ -32,10 +32,11 @@ module.exports = function (config) {
         //    'ng-html2js',
         //    'karma-ng-html2js-preprocessor'],
         plugins: [
-                  'karma-jasmine',
-                  'karma-coverage',
-                  'karma-chrome-launcher',
-                  'karma-safari-launcher',
+                'karma-jasmine',
+                'karma-coverage',
+                'karma-phantomjs-launcher'
+                  //'karma-chrome-launcher',
+                  //'karma-safari-launcher'
         ],
 
         // pre-process matching files before serving them to the browser
@@ -79,7 +80,7 @@ module.exports = function (config) {
 
         // start these browsers
         // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-        browsers: ['Chrome'],
+        browsers: ['PhantomJS'],
 
 
         // Continuous Integration mode
