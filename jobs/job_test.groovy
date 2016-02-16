@@ -15,7 +15,7 @@ folder(acceptanceStage) {
 }
 
 
-freeStyleJob() {
+freeStyleJob("$commitStage/clean and compile") {
     description('clean and compile')
     scm {
         git 'https://github.com/ernstvorsteveld/example-resource.git'
@@ -29,7 +29,7 @@ freeStyleJob() {
     }
 }
 
-job("$basePath/test") {
+job("$commitStage/test") {
     description('Execute the unit tests.')
     steps {
         gradle {
@@ -40,7 +40,7 @@ job("$basePath/test") {
     }
 }
 
-job("$basePath/integration tests") {
+job("$commitStage/integration tests") {
     description('Execute the integration tests')
     steps {
         gradle {
@@ -50,3 +50,23 @@ job("$basePath/integration tests") {
         }
     }
 }
+
+job("$commitStage/code analysis") {
+    description('Execute the code analysis')
+}
+
+job("$commitStage/create jar") {
+    description('Create the jar')
+    steps {
+        gradle {
+            description 'Create the jar.'
+            useWrapper true
+            tasks 'jar'
+        }
+    }
+}
+
+job("$commitStage/create docker image") {
+    description('Create docker image')
+}
+
