@@ -17,6 +17,7 @@ folder(acceptanceStage) {
 
 freeStyleJob("$commitStage/clean and compile") {
     description('Clone from git, clean and compile the project')
+    customWorkspace('/var/jenkins_home/jobdsl')
     scm {
         git {
             remote {
@@ -45,6 +46,7 @@ freeStyleJob("$commitStage/clean and compile") {
 
 job("$commitStage/test") {
     description('Execute the unit tests.')
+    customWorkspace('/var/jenkins_home/jobdsl')
     steps {
         gradle {
             description 'Test the project'
@@ -56,6 +58,7 @@ job("$commitStage/test") {
 
 job("$commitStage/integration tests") {
     description('Execute the integration tests')
+    customWorkspace('/var/jenkins_home/jobdsl')
     steps {
         gradle {
             description 'Test the project'
