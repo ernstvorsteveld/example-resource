@@ -85,7 +85,7 @@ job("$commitStage/javascript tests") {
         gradle {
             description 'Test the javascript code'
             useWrapper true
-            tasks 'javascriptTest'
+            tasks 'karmaRun javascriptTest'
         }
         downstreamParameterized {
             trigger("code analysis") {
