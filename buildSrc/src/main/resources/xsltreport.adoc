@@ -10,3 +10,5 @@ It should be a "normal" project structure. It is automatically compiled by gradl
 
 To generate an overview of the complexity use the png generator for dot (need to be installed):
 dot -Tpng build/reports/jdepend/jdepend_main.dot -o main.png
+
+more documentation: http://www.graphviz.org/pdf/dotguide.pdf
