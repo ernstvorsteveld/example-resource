@@ -18,7 +18,12 @@ folder(acceptanceStage) {
 freeStyleJob("$commitStage/clean and compile") {
     description('Clone from git, clean and compile the project')
     scm {
-        git 'https://github.com/ernstvorsteveld/example-resource.git'
+        git {
+            remote {
+                git 'https://github.com/ernstvorsteveld/example-resource.git'
+            }
+            createTag(false)
+        }
     }
     steps {
         gradle {
