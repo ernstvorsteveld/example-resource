@@ -22,8 +22,12 @@ freeStyleJob("$commitStage/clean and compile") {
             remote {
                 github('ernstvorsteveld/example-resource')
             }
+            branch('master')
             createTag(false)
         }
+    }
+    triggers {
+        scm('H/15 * * * *')
     }
     steps {
         gradle {
