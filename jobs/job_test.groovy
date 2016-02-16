@@ -51,10 +51,10 @@ job("$commitStage/test") {
         gradle {
             description 'Test the project'
             useWrapper true
-            tasks 'integration tests'
+            tasks 'test'
         }
         downstreamParameterized {
-            trigger("test") {
+            trigger("integration tests") {
                 predefinedProp("SOURCE_BUILD_NUMBER","${BUILD_NUMBER}")
             }
         }
