@@ -1,0 +1,13 @@
+import java.text.SimpleDateFormat
+
+ext.buildTime = new BuildTime()
+
+class BuildTime {
+
+    @Override
+    String toString() {
+        def df = new SimpleDateFormat("yyyy-MM-dd 'T' HH:mm 'Z'")
+        df.setTimeZone(TimeZone.getTimeZone("UTC"))
+        df.format(new Date())
+    }
+}

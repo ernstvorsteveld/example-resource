@@ -29,12 +29,20 @@ apply plugin: 'jdepend'
 
 apply from: "$rootDir/gradle/versioning.gradle"
 apply from: "$rootDir/gradle/jdepend.gradle"
+apply from: "$rootDir/gradle/date.gradle"
 
 ext.configDir = new File(rootDir, 'config')
 
 jar {
     baseName = project.name
     version = project.version.toString()
+
+    manifest {
+        attributes  "Implementation-Title": project.name,
+                    "Implementation-Version": project.version.toString(),
+                    "Group" : project.group,
+                    "Build-date-time" : project.ext.buildTime.toString();
+    }
 }
 
 sourceCompatibility = '1.8'
@@ -87,7 +95,7 @@ sourceSets {
 pmd {
     ignoreFailures = true
 
-    ruleSets = [ "java-basic", "java-strings", "java-braces" ]
+    ruleSets = ["java-basic", "java-strings", "java-braces"]
 }
 
 task integrationTest(type: Test) {
