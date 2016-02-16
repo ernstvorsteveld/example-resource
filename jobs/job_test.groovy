@@ -20,7 +20,7 @@ freeStyleJob("$commitStage/clean and compile") {
     scm {
         git {
             remote {
-                github('https://github.com/ernstvorsteveld/example-resource.git')
+                github('ernstvorsteveld/example-resource')
             }
             createTag(false)
         }
