@@ -35,15 +35,9 @@ freeStyleJob("$commitStage/clean and compile") {
             useWrapper true
             tasks 'clean classes'
         }
-    }
-    wrappers {
-        release {
-            postSuccessfulBuildSteps {
-                downstreamParameterized {
-                    trigger("test") {
-                        predefinedProp("STAGE", "development")
-                    }
-                }
+        downstreamParameterized {
+            trigger("test") {
+                currentBuild()
             }
         }
     }
