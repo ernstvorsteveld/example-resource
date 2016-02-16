@@ -51,7 +51,12 @@ job("$commitStage/test") {
         gradle {
             description 'Test the project'
             useWrapper true
-            tasks 'test'
+            tasks 'integration tests'
+        }
+        downstreamParameterized {
+            trigger("test") {
+                predefinedProp("SOURCE_BUILD_NUMBER","${BUILD_NUMBER}")
+            }
         }
     }
 }
@@ -63,27 +68,90 @@ job("$commitStage/integration tests") {
         gradle {
             description 'Test the project'
             useWrapper true
-            tasks 'test'
+            tasks 'integrationTest'
+        }
+        downstreamParameterized {
+            trigger("javascript tests") {
+                predefinedProp("SOURCE_BUILD_NUMBER","${BUILD_NUMBER}")
+            }
+        }
+    }
+}
+
+job("$commitStage/javascript tests") {
+    description('Execute the javascript tests')
+    customWorkspace('/var/jenkins_home/jobdsl')
+    steps {
+        gradle {
+            description 'Test the javascript code'
+            useWrapper true
+            tasks 'javascriptTest'
+        }
+        downstreamParameterized {
+            trigger("code analysis") {
+                predefinedProp("SOURCE_BUILD_NUMBER","${BUILD_NUMBER}")
+            }
         }
     }
 }
 
 job("$commitStage/code analysis") {
     description('Execute the code analysis')
+    customWorkspace('/var/jenkins_home/jobdsl')
+    steps {
+        downstreamParameterized {
+            trigger("create jar") {
+                predefinedProp("SOURCE_BUILD_NUMBER","${BUILD_NUMBER}")
+            }
+        }
+    }
 }
 
 job("$commitStage/create jar") {
     description('Create the jar')
+    customWorkspace('/var/jenkins_home/jobdsl')
     steps {
         gradle {
             description 'Create the jar.'
             useWrapper true
             tasks 'jar'
         }
+        downstreamParameterized {
+            trigger("deploy nexus") {
+                predefinedProp("SOURCE_BUILD_NUMBER","${BUILD_NUMBER}")
+            }
+        }
+    }
+}
+
+job("$commitStage/deploy nexus") {
+    description('Deploy to nexus')
+    customWorkspace('/var/jenkins_home/jobdsl')
+    steps {
+        downstreamParameterized {
+            trigger("export sonar") {
+                predefinedProp("SOURCE_BUILD_NUMBER","${BUILD_NUMBER}")
+            }
+        }
+    }
+}
+
+job("$commitStage/export sonar") {
+    description('Reports to sonar')
+    customWorkspace('/var/jenkins_home/jobdsl')
+    steps {
+        downstreamParameterized {
+            trigger("create docker image") {
+                predefinedProp("SOURCE_BUILD_NUMBER","${BUILD_NUMBER}")
+            }
+        }
     }
 }
 
 job("$commitStage/create docker image") {
     description('Create docker image')
+    customWorkspace('/var/jenkins_home/jobdsl')
+    steps {
+    }
 }
 

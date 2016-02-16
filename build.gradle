@@ -94,7 +94,6 @@ sourceSets {
 
 pmd {
     ignoreFailures = true
-
     ruleSets = ["java-basic", "java-strings", "java-braces"]
 }
 
