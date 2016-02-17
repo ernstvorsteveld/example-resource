@@ -1,6 +1,5 @@
 String basePath = 'example-resource jobs'
 String commitStage = "$basePath/commit stage"
-String acceptanceStage = "$basePath/acceptance stage"
 
 folder(basePath) {
     description 'The example resource build pipeline.'
@@ -10,12 +9,7 @@ folder(commitStage) {
     description 'The commit stage of the build pipeline. Assertion on technical level.'
 }
 
-folder(acceptanceStage) {
-    description 'The acceptance stage of the build pipeline.'
-}
-
-
-freeStyleJob("$commitStage/clean and compile") {
+freeStyleJob("$commitStage/100-clean and compile") {
     description('Clone from git, clean and compile the project')
     customWorkspace('/var/jenkins_home/jobdsl')
     scm {
@@ -37,14 +31,14 @@ freeStyleJob("$commitStage/clean and compile") {
             tasks 'clean classes'
         }
         downstreamParameterized {
-            trigger("test") {
+            trigger("200-test") {
                 predefinedProp("SOURCE_BUILD_NUMBER","${BUILD_NUMBER}")
             }
         }
     }
 }
 
-job("$commitStage/test") {
+job("$commitStage/200-test") {
     description('Execute the unit tests.')
     customWorkspace('/var/jenkins_home/jobdsl')
     steps {
@@ -54,14 +48,14 @@ job("$commitStage/test") {
             tasks 'test -x karmaRun'
         }
         downstreamParameterized {
-            trigger("integration tests") {
+            trigger("300-integration tests") {
                 predefinedProp("SOURCE_BUILD_NUMBER","${BUILD_NUMBER}")
             }
         }
     }
 }
 
-job("$commitStage/integration tests") {
+job("$commitStage/300-integration tests") {
     description('Execute the integration tests')
     customWorkspace('/var/jenkins_home/jobdsl')
     steps {
@@ -78,7 +72,7 @@ job("$commitStage/integration tests") {
     }
 }
 
-job("$commitStage/javascript tests") {
+job("$commitStage/400-javascript tests") {
     description('Execute the javascript tests')
     customWorkspace('/var/jenkins_home/jobdsl')
     steps {
@@ -88,26 +82,26 @@ job("$commitStage/javascript tests") {
             tasks 'karmaRun javascriptTest'
         }
         downstreamParameterized {
-            trigger("code analysis") {
+            trigger("500-code analysis") {
                 predefinedProp("SOURCE_BUILD_NUMBER","${BUILD_NUMBER}")
             }
         }
     }
 }
 
-job("$commitStage/code analysis") {
+job("$commitStage/500-code analysis") {
     description('Execute the code analysis')
     customWorkspace('/var/jenkins_home/jobdsl')
     steps {
         downstreamParameterized {
-            trigger("create jar") {
+            trigger("600-create jar") {
                 predefinedProp("SOURCE_BUILD_NUMBER","${BUILD_NUMBER}")
             }
         }
     }
 }
 
-job("$commitStage/create jar") {
+job("$commitStage/600-create jar") {
     description('Create the jar')
     customWorkspace('/var/jenkins_home/jobdsl')
     steps {
@@ -117,38 +111,38 @@ job("$commitStage/create jar") {
             tasks 'jar'
         }
         downstreamParameterized {
-            trigger("deploy nexus") {
+            trigger("700-deploy nexus") {
                 predefinedProp("SOURCE_BUILD_NUMBER","${BUILD_NUMBER}")
             }
         }
     }
 }
 
-job("$commitStage/deploy nexus") {
+job("$commitStage/700-deploy nexus") {
     description('Deploy to nexus')
     customWorkspace('/var/jenkins_home/jobdsl')
     steps {
         downstreamParameterized {
-            trigger("export sonar") {
+            trigger("800-export sonar") {
                 predefinedProp("SOURCE_BUILD_NUMBER","${BUILD_NUMBER}")
             }
         }
     }
 }
 
-job("$commitStage/export sonar") {
+job("$commitStage/800-export sonar") {
     description('Reports to sonar')
     customWorkspace('/var/jenkins_home/jobdsl')
     steps {
         downstreamParameterized {
-            trigger("create docker image") {
+            trigger("900-create docker image") {
                 predefinedProp("SOURCE_BUILD_NUMBER","${BUILD_NUMBER}")
             }
         }
     }
 }
 
-job("$commitStage/create docker image") {
+job("$commitStage/900-create docker image") {
     description('Create docker image')
     customWorkspace('/var/jenkins_home/jobdsl')
     steps {
