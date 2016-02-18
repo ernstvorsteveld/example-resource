@@ -65,7 +65,7 @@ job("$commitStage/300-integration tests") {
             tasks 'integrationTest'
         }
         downstreamParameterized {
-            trigger("javascript tests") {
+            trigger("400-javascript tests") {
                 predefinedProp("SOURCE_BUILD_NUMBER","${BUILD_NUMBER}")
             }
         }
