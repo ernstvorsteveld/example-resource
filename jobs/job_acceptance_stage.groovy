@@ -1,6 +1,10 @@
 String basePath = 'example-resource jobs'
 String acceptanceStage = "$basePath/acceptance stage"
 
+folger(basePath) {
+    description 'Example build pipeline.'
+}
+
 folder(acceptanceStage) {
     description 'The acceptance stage of the build pipeline.'
 }

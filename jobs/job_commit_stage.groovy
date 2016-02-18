@@ -1,8 +1,8 @@
 String basePath = 'example-resource jobs'
 String commitStage = "$basePath/commit stage"
 
-folder(basePath) {
-    description 'The example resource build pipeline.'
+folger(basePath) {
+    description 'Example build pipeline.'
 }
 
 folder(commitStage) {

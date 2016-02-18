@@ -9,3 +9,4 @@ Install:
 * gradle plugin
 * grails plugin
 * parameterized-trigger plugin
+* Multijob plugin
