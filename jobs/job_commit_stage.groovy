@@ -17,7 +17,7 @@ freeStyleJob("$commitStage/100-clean and compile") {
             remote {
                 github('ernstvorsteveld/example-resource')
             }
-            branch('master')
+            branch('*/master')
             createTag(false)
         }
     }

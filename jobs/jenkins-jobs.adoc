@@ -7,6 +7,5 @@ Install:
 * git plugin
 * cloudbees-folder plugin
 * gradle plugin
-* grails plugin
 * parameterized-trigger plugin
 * Multijob plugin
