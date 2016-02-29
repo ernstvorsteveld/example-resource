@@ -2,12 +2,15 @@ package nl.vorstdev.example.resource.resource;
 
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.stereotype.Component;
 
 /**
  * Created by ernstvorsteveld on 29/02/16.
  */
-@ConfigurationProperties(locations = "classpath:/appprops.yml", prefix = "endpoints")
+@Component
+@ConfigurationProperties(prefix = "endpoints.info")
 public class ApplicationProperties {
+
     private String id;
     private String sensitive;
     private String enabled;
