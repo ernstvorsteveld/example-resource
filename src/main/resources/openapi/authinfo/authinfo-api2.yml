@@ -4,16 +4,17 @@ info:
   title: Authentication info API
   description: API for retrieval of authentication info for a user.
 basePath: "/api/v1"
-schemes:
+schemes: 
   - "http"
-consumes:
+consumes: 
   - "application/json"
-produces:
+produces: 
   - "application/json"
 host: "dev.tulip.iwelcome.com"
 paths:
-  "/users/{userId}/authinfo":
+  "/users/{userId}/authninfo":
     get:
+      operationId: getAuthnInfo2
       description: "Get the authentication info for the user with userId, based upon configuration."
       parameters:
         - name: userId
@@ -36,21 +37,21 @@ paths:
           description: Ok
           schema:
             type: array
-            items:
+            items: 
               $ref: "#/definitions/AuthInfo"
         400:
           description: Not acceptable because the user with the userId was not found.
         406:
           description: Missing authentication info configuration.
-
+        
 definitions:
   AuthInfo:
     type: object
     required:
-    - attribute
-    - value
+    - key
+    - val
     properties:
-      attribute:
-        type: string
-      value:
-        value: string
+      key:
+        type: "string"
+      val:
+        type: "string"
