@@ -2,6 +2,7 @@ package nl.vorstdev.example.resource.domain;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import org.springframework.hateoas.ResourceSupport;
 
 import java.util.Map;
 import java.util.UUID;
@@ -10,14 +11,14 @@ import java.util.UUID;
  * Created by ernstvorsteveld on 16/01/16.
  */
 //@ApiModel(description = "The Person object.")
-public class Person {
+public class Person extends ResourceSupport {
 
     public static final String USERNAME = "username";
     public static final String FIRSTNAME = "firstname";
     public static final String MIDDLENAME = "middlename";
     public static final String LASTNAME = "lastname";
 
-    private String id;
+    private String personId;
     private String userName;
     private String firstName;
     private String middleName;
@@ -27,12 +28,12 @@ public class Person {
         init();
     }
 
-    public String getId() {
-        return id;
+    public String getPersonId() {
+        return personId;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setPersonId(String personId) {
+        this.personId = personId;
     }
 
     public String getUserName() {
@@ -68,7 +69,7 @@ public class Person {
     }
 
     public void init() {
-        this.id = UUID.randomUUID().toString();
+        this.personId = UUID.randomUUID().toString();
     }
 
     public static class PersonBuilder {

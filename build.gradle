@@ -13,6 +13,8 @@ buildscript {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
         classpath "gradle.plugin.com.craigburke.gradle:karma-gradle:1.4.3"
         classpath "org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:1.2"
+        classpath "gradle.plugin.nl.javadude.gradle.plugins:license-gradle-plugin:0.12.1"
+        classpath 'gradle.plugin.org.detoeuf:swagger-codegen-plugin:1.5.0'
     }
 }
 
@@ -23,12 +25,15 @@ apply plugin: 'spring-boot'
 apply plugin: 'jacoco'
 apply plugin: 'org.sonarqube'
 //apply plugin: 'checkstyle'
+apply plugin: "com.github.hierynomus.license"
 
 apply from: "$rootDir/gradle/version.gradle"
 apply from: "$rootDir/gradle/jdepend.gradle"
 apply from: "$rootDir/gradle/date.gradle"
 apply from: "$rootDir/gradle/pmd.gradle"
 apply from: "$rootDir/gradle/karma.gradle"
+apply from: "$rootDir/gradle/authninfo-api.gradle"
+apply from: "$rootDir/gradle/authninfo-api2.gradle"
 
 ext.configDir = new File(rootDir, 'config')
 

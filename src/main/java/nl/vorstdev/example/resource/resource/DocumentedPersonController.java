@@ -3,6 +3,7 @@ package nl.vorstdev.example.resource.resource;
 import io.swagger.annotations.*;
 import nl.vorstdev.example.resource.domain.Person;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.servlet.http.HttpServletResponse;
@@ -70,7 +71,6 @@ public interface DocumentedPersonController {
      * Retrieve a user by its username.
      *
      * @param userName The username of the user to search for.
-     * @param response The servlet response.
      * @return The user when found.
      */
     @ApiOperation(code = 200, httpMethod = GET, value = "/{userName}", notes = NOTES_GET,
@@ -78,15 +78,13 @@ public interface DocumentedPersonController {
     @ApiResponses(value = {
             @ApiResponse(code = 404, message = MSG_USERNAME_NOT_FOUND)
     })
-    Person person(
-            final String userName,
-            HttpServletResponse response);
+    ResponseEntity<Person> person(
+            final String userName);
 
     /**
      * Create a user.
      *
      * @param personMap The set of values.
-     * @param response  The servlet response.
      * @return The created user.
      */
     @ApiOperation(code = 201, httpMethod = "POST", value = "/", notes = NOTES_CREATE,
@@ -97,15 +95,13 @@ public interface DocumentedPersonController {
     @ApiResponses(value = {
             @ApiResponse(code = 406, message = MSG_PERSON_CREATE_NOT_ACCEPTABLE)
     })
-    Person create(
-            Map<String, String> personMap,
-            HttpServletResponse response);
+    ResponseEntity<Person> create(
+            Map<String, String> personMap);
 
     /**
      * Delete a user with a username.
      *
      * @param userName The username of the user to delete.
-     * @param response The servlet response.
      */
     @ApiOperation(code = 200, httpMethod = "DELETE", value = "/{userName}", notes = NOTES_DELETE,
             response = Void.class,
@@ -115,8 +111,7 @@ public interface DocumentedPersonController {
     @ApiResponses(value = {
             @ApiResponse(code = 200, response = Person.class, message = "Message for person.", reference = "Person"),
             @ApiResponse(code = 404, message = MSG_USERNAME_NOT_FOUND)})
-    void delete(
-            final String userName,
-            HttpServletResponse response);
+    ResponseEntity<Person> delete(
+            final String userName);
 
 }

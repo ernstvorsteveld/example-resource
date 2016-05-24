@@ -1,18 +1,22 @@
 package nl.vorstdev.example.resource.resource;
 
 import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiResponse;
 import nl.vorstdev.example.resource.domain.Person;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.Link;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletResponse;
+import java.net.URI;
 import java.util.List;
 import java.util.Map;
+
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 
 /**
  * Created by ernstvorsteveld on 16/01/16.
@@ -35,55 +39,50 @@ public class PersonController implements DocumentedPersonController {
         return personInitializer.getPersons().subList(page - 1, size);
     }
 
-    @RequestMapping(value = "{userName}", method = RequestMethod.GET)
+    @RequestMapping(value = "/{userName}", method = RequestMethod.GET)
     @ResponseBody
-    public Person person(
-            @PathVariable("userName") final String userName,
-            HttpServletResponse response) {
+    public ResponseEntity<Person> person(
+            @PathVariable("userName") final String userName) {
         logger.debug("About to load by userName {}.", userName);
         for (Person person : personInitializer.getPersons()) {
             if (person.getUserName().equals(userName)) {
-                response.setStatus(HttpServletResponse.SC_OK);
-                return person;
+                person.add(linkTo(methodOn(PersonController.class).person(userName)).withSelfRel());
+                return ResponseEntity.ok(person);
             }
         }
-        response.setStatus(HttpServletResponse.SC_NOT_FOUND);
-        return null;
+        throw new NotFoundException(userName, Person.class);
     }
 
     @RequestMapping(method = RequestMethod.POST,
             consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     @ApiOperation(value = "/", response = Person.class, code = 201)
-    public Person create(
-            @RequestBody Map<String, String> personMap,
-            HttpServletResponse response) {
+    public ResponseEntity<Person> create(
+            @RequestBody Map<String, String> personMap) {
         logger.debug("About to create a user with values: {}.", personMap);
         Person person = new Person.PersonBuilder(personMap).build();
         personInitializer.getPersons().add(person);
-        response.setStatus(HttpServletResponse.SC_CREATED);
-        return person;
+        Link link = linkTo(methodOn(PersonController.class).person(person.getUserName())).withSelfRel();
+        return ResponseEntity.created(URI.create(link.getHref())).body(person);
     }
 
     @RequestMapping(value = "{userName}", method = RequestMethod.DELETE)
     @ResponseBody
-    public void delete(
-            @PathVariable("userName") final String userName,
-            HttpServletResponse response) {
+    public ResponseEntity<Person> delete(
+            @PathVariable("userName") final String userName) {
         logger.debug("About to delete by userName {}.", userName);
-        boolean found = false;
+        Person deleted = null;
         for (Person person : personInitializer.getPersons()) {
             if (person.getUserName().equals(userName)) {
-                response.setStatus(HttpServletResponse.SC_ACCEPTED);
+                deleted = person;
                 personInitializer.getPersons().remove(person);
-                found = true;
                 break;
             }
         }
-        if (!found) {
-            response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+        if (deleted == null) {
+            throw new NotFoundException(userName, Person.class);
         } else {
-            response.setStatus(HttpServletResponse.SC_ACCEPTED);
+            return ResponseEntity.accepted().body(deleted);
         }
     }
 }

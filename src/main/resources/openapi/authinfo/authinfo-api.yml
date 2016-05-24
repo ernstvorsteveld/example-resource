@@ -1,0 +1,56 @@
+swagger: '2.0'
+info:
+  version: "1.0.0"
+  title: Authentication info API
+  description: API for retrieval of authentication info for a user.
+basePath: "/api/v1"
+schemes:
+  - "http"
+consumes:
+  - "application/json"
+produces:
+  - "application/json"
+host: "dev.tulip.iwelcome.com"
+paths:
+  "/users/{userId}/authinfo":
+    get:
+      description: "GetGet the authentication info for the user with userId, based upon configuration."
+      parameters:
+        - name: userId
+          in: path
+          description: The id of the user to retrieve the authentication info for.
+          required: true
+          type: string
+        - name: authn
+          in: query
+          description: The type of authentication, can be saml or oauth2
+          required: true
+          type: string
+        - name: sp
+          in: query
+          description: The name of the service provider. Specify when using saml.
+          required: false
+          type: string
+      responses:
+        200:
+          description: Ok
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/AuthInfo"
+        400:
+          description: Not acceptable because the user with the userId was not found.
+        406:
+          description: Missing authentication info configuration.
+
+definitions:
+  AuthInfo:
+    type: object
+    required:
+    - attribute
+    - value
+    properties:
+      attribute:
+        type: string
+      value:
+        value: string

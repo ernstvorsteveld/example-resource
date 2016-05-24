@@ -1,0 +1,40 @@
+buildscript {
+    repositories {
+        maven { url 'http://repo.spring.io/milestone' }
+        maven { url 'http://repo.spring.io/snapshot' }
+        maven { url 'https://plugins.gradle.org/m2/' }
+    }
+    dependencies {
+        classpath 'gradle.plugin.org.detoeuf:swagger-codegen-plugin:1.5.0'
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'org.detoeuf.swagger-code-gen'
+
+sourceSets {
+    main {
+        java {
+            srcDir 'src/main/java'
+            srcDir "${project.rootDir}/../generated/openapi/src/main/java"
+        }
+    }
+}
+
+clean {
+    delete "${project.rootDir}/../generated"
+}
+
+ext {
+    swaggerInputSpec = 'src/main/resources/openapi/authinfo/authinfo-api.yml'
+    swaggerLanguage = 'spring-mvc'
+    swaggerApiPackage = 'nl.vorstdev.generated.api'
+    swaggerModelPackage = 'nl.vorstdev.generated.domain'
+    swaggerConfigPackage = 'nl.vorstdev.generated.config'
+    swaggerOutput = "${project.rootDir}/../generated/openapi"
+    swaggerTemplateDirectory = "$projectDir/src/main/resources/openapi/authinfo/generator-templates"
+}
+
+gradle.projectsEvaluated {
+    compileJava.dependsOn(swagger)
+}
